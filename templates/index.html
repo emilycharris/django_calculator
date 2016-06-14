@@ -8,12 +8,22 @@
     <link rel="stylesheet" href="{% static 'calc_app/main.css' %}">
 </head>
 <body>
+
+
+<div class="container">
+    <div class="page-header">
+    <h1>Calculator <small>Please enter numbers for A and B: </small></h1>
+    </div>
+
 <form action="" method="post">
     {% csrf_token %}
-    {{ form }}
+    {{ form.as_p }}
      <input type="submit" value="Submit" />
-    <output>{{ result }}</output>
+    <br>
+    <br>
+    <p>Equation entered: {{ a }} {{ action }} {{ b }}</p>
+    <output>Result: {{ result }}</output>
 </form>
-
+</div>
 </body>
 </html>
