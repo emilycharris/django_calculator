@@ -12,17 +12,19 @@
 
 <div class="container">
     <div class="page-header">
-    <h1>Calculator <small>Please enter numbers for A and B: </small></h1>
+    <h1>Calculator <small>Please enter values to calculate: </small></h1>
     </div>
 
 <form action="" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form.a }}
+    {{ form.action }}
+    {{ form.b }}
      <input type="submit" value="Submit" />
     <br>
     <br>
-    <p>Equation entered: {{ a }} {{ action }} {{ b }}</p>
-    <output>Result: {{ result }}</output>
+    <h4><em>Equation entered: {{ a }} {{ action }} {{ b }}</em></h4>
+    <output><h4><strong>Result: {{ result }}</strong></h4></output>
 </form>
 </div>
 </body>
