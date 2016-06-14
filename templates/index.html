@@ -4,10 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Calculator</title>
-    <link rel="stylesheet" href="{% static 'calc_app/main.css' %}">
     <link rel="stylesheet" href="{% static 'calc_app/bootstrap-3.3.6-dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'calc_app/main.css' %}">
 </head>
 <body>
-This is the index
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+     <input type="submit" value="Submit" />
+    <output>{{ result }}</output>
+</form>
+
 </body>
 </html>
