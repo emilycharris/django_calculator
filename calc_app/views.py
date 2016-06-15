@@ -27,4 +27,3 @@ def index_view(request):
             except ZeroDivisionError:
                 result = "You can't divide by zero."
     return render(request, 'index.html', {'form': CalcForm(), 'result': result, 'a': a, 'b': b, 'action': action})
-
