@@ -1,3 +1,7 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from calc_app.forms import CalcForm
 
@@ -27,3 +31,20 @@ def index_view(request):
             except ZeroDivisionError:
                 result = "You can't divide by zero."
     return render(request, 'index.html', {'form': CalcForm(), 'result': result, 'a': a, 'b': b, 'action': action})
+
+def create_user_view(request):
+    if request.POST:
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("index_view"))
+        else:
+            return render(request, 'create_user.html', {"form": form})
+    form = UserCreationForm()
+    return render(request, 'create_user.html', {"form": form})
+
+
+@login_required
+def authenticated_view(request):
+    print(request.user)
+    return render(request, 'authenticated.html')

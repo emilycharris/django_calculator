@@ -1,0 +1,31 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="{% static 'calc_app/bootstrap-3.3.6-dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'calc_app/main.css' %}">
+</head>
+<body>
+
+
+<div class="container">
+    <div class="page-header">
+    <h1>Calculator <small>Please enter values to calculate: </small></h1>
+    </div>
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.a }}
+    {{ form.action }}
+    {{ form.b }}
+     <input type="submit" value="Submit" />
+    <br>
+    <br>
+    <h4><em>Equation entered: {{ a }} {{ action }} {{ b }}</em></h4>
+    <output><h4><strong>Result: {{ result }}</strong></h4></output>
+</form>
+</div>
+</body>
+</html>

@@ -15,9 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from calc_app.views import index_view
+from django.contrib.auth.views import login
+
+from calc_app.views import index_view, create_user_view, authenticated_view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', index_view)
+    url(r'^$', index_view, name='index_view'),
+    url(r'^login/$', login, name='login_view'),
+    url(r'^create_user/$', create_user_view, name='create_user_view'),
+    url(r'^authenticated/$', authenticated_view, name='authenticated_view')
 ]
