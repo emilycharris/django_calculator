@@ -8,13 +8,35 @@
     <link rel="stylesheet" href="{% static 'calc_app/main.css' %}">
 </head>
 <body>
-
-
 <div class="container">
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"></button>
+
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="{% url 'index_view' %}">Home</a></li>
+        <li><a href="{% url 'create_user_view' %}">Create An Account <span class="sr-only">(current)</span></a></li>
+        <li><a href="{% url 'login_view' %}">Login</a></li>
+        <li><a href="{% url 'profile_view' %}">Welcome {{ user }}</a></li>
+        <li><a href="{% url 'logout_view' %}">Logout {{ user }}</a></li></ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+{% block header %}
     <div class="page-header">
     <h1>Calculator <small>Please enter values to calculate: </small></h1>
     </div>
-
+{% endblock %}
+{% block content %}
 <form action="" method="post">
     {% csrf_token %}
     {{ form.a }}
@@ -26,6 +48,7 @@
     <h4><em>Equation entered: {{ a }} {{ action }} {{ b }}</em></h4>
     <output><h4><strong>Result: {{ result }}</strong></h4></output>
 </form>
+    {% endblock %}
 </div>
 </body>
 </html>

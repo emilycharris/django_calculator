@@ -4,6 +4,8 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from calc_app.forms import CalcForm
+from calc_app.models import Operation
+
 
 # Create your views here.
 
@@ -30,7 +32,9 @@ def index_view(request):
                     result = a / b
             except ZeroDivisionError:
                 result = "You can't divide by zero."
-    return render(request, 'index.html', {'form': CalcForm(), 'result': result, 'a': a, 'b': b, 'action': action})
+            if request.user.is_authenticated():
+                Operation.objects.create(user=request.user, a=a, b=b, operator=action, result=result)
+    return render(request, 'index.html', {'form': CalcForm, 'result': result, 'a': a, 'b': b, 'action': action})
 
 def create_user_view(request):
     if request.POST:
@@ -45,6 +49,5 @@ def create_user_view(request):
 
 
 @login_required
-def authenticated_view(request):
-    print(request.user)
-    return render(request, 'authenticated.html')
+def profile_view(request):
+    return render(request, 'index.html')
