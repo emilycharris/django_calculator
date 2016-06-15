@@ -21,19 +21,20 @@ def index_view(request):
             a = form.cleaned_data['a']
             b = form.cleaned_data['b']
             action = form.cleaned_data['action']
-            try:
-                if action == '+':
-                    result = a + b
-                elif action == '-':
-                    result = a - b
-                elif action == '*':
-                    result = a * b
-                elif action == '/':
-                    result = a / b
-            except ZeroDivisionError:
-                result = "You can't divide by zero."
-            if request.user.is_authenticated():
-                Operation.objects.create(user=request.user, a=a, b=b, operator=action, result=result)
+            #try:
+            if action == '+':
+                result = a + b
+            elif action == '-':
+                result = a - b
+            elif action == '*':
+                result = a * b
+            elif action == '/':
+                result = a / b
+            #except (ZeroDivisionError, ValueError):
+                #print("You can't divide by zero.")
+                #reverse('index_view')
+        if request.user.is_authenticated():
+            Operation.objects.create(user=request.user, a=a, b=b, operator=action, result=result)
     return render(request, 'index.html', {'form': CalcForm, 'result': result, 'a': a, 'b': b, 'action': action})
 
 def create_user_view(request):
@@ -50,4 +51,4 @@ def create_user_view(request):
 
 @login_required
 def profile_view(request):
-    return render(request, 'index.html')
+    return render(request, 'profile.html')

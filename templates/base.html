@@ -21,11 +21,15 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="{% url 'index_view' %}">Home</a></li>
-        <li><a href="{% url 'create_user_view' %}">Create An Account <span class="sr-only">(current)</span></a></li>
-        <li><a href="{% url 'login_view' %}">Login</a></li>
-        <li><a href="{% url 'profile_view' %}">Welcome {{ user }}</a></li>
-        <li><a href="{% url 'logout_view' %}">Logout {{ user }}</a></li></ul>
+
+          {% if request.user.is_authenticated %}
+            <li><a href="{% url 'index_view' %}">Home</a></li>
+            <li><a href="{% url 'profile_view' %}">History for {{ user }}</a></li>
+            <li><a href="{% url 'logout_view' %}">Logout</a></li></ul>
+          {% else %}
+            <li><a href="{% url 'create_user_view' %}">Create An Account <span class="sr-only">(current)</span></a></li>
+            <li><a href="{% url 'login_view' %}">Login</a></li>
+          {% endif %}
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
@@ -36,19 +40,9 @@
     <h1>Calculator <small>Please enter values to calculate: </small></h1>
     </div>
 {% endblock %}
+
 {% block content %}
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form.a }}
-    {{ form.action }}
-    {{ form.b }}
-     <input type="submit" value="Submit" />
-    <br>
-    <br>
-    <h4><em>Equation entered: {{ a }} {{ action }} {{ b }}</em></h4>
-    <output><h4><strong>Result: {{ result }}</strong></h4></output>
-</form>
-    {% endblock %}
+{% endblock %}
 </div>
 </body>
 </html>
