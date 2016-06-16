@@ -16,7 +16,16 @@
     <br>
     <br>
     <h4><em>Equation entered: {{ a }} {{ action }} {{ b }}</em></h4>
-    <output><h4><strong>Result: {{ result }}</strong></h4></output>
+    <output><h4><strong>Result: {{ result }}</strong></h4>
+    {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+        {{ message }}</ul>
+        {% endfor %}
+        </ul>
+    {% endif %}</output>
+
 </form>
+
 {% endblock %}
 
