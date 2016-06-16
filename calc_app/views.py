@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -51,4 +52,5 @@ def create_user_view(request):
 
 @login_required
 def profile_view(request):
-    return render(request, 'profile.html')
+    calculations = {"calculations": Operation.objects.filter(user=User.objects.get(id=request.user.id))}
+    return render(request, 'profile.html', calculations)
