@@ -47,7 +47,7 @@ def create_user_view(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse("index_view"))
+            return HttpResponseRedirect(reverse("login_view"))
         else:
             return render(request, 'create_user.html', {"form": form})
     form = UserCreationForm()
@@ -56,5 +56,5 @@ def create_user_view(request):
 
 @login_required
 def profile_view(request):
-    calculations = {"calculations": Operation.objects.filter(user=User.objects.get(id=request.user.id))}
+    calculations = {"calculations": Operation.objects.filter(user=request.user)}
     return render(request, 'profile.html', calculations)
